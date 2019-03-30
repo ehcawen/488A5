@@ -1,4 +1,4 @@
-Debug/Main.o: ../Main.cpp ../A5.hpp ../../shared/include/glm/glm.hpp \
+Debug/Main.o: ../Main.cpp ../A1.hpp ../../shared/include/glm/glm.hpp \
   ../../shared/include/glm/detail/_fixes.hpp \
   ../../shared/include/glm/fwd.hpp \
   ../../shared/include/glm/detail/type_int.hpp \
@@ -94,7 +94,7 @@ Debug/Main.o: ../Main.cpp ../A5.hpp ../../shared/include/glm/glm.hpp \
   ../../shared/cs488-framework/OpenGLImport.hpp \
   ../../shared/cs488-framework/ShaderProgram.hpp ../maze.hpp
 
-../A5.hpp:
+../A1.hpp:
 
 ../../shared/include/glm/glm.hpp:
 

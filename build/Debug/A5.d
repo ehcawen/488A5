@@ -1,4 +1,11 @@
-Debug/A5.o: ../A5.cpp ../A5.hpp ../../shared/include/glm/glm.hpp \
+Debug/A5.o: ../A5.cpp ../A5.hpp \
+  ../../shared/cs488-framework/CS488Window.hpp \
+  ../../shared/include/GLFW/glfw3.h \
+  ../../shared/cs488-framework/OpenGLImport.hpp \
+  ../../shared/cs488-framework/ShaderProgram.hpp \
+  ../../shared/cs488-framework/MeshConsolidator.hpp \
+  ../../shared/cs488-framework/BatchInfo.hpp \
+  ../../shared/include/glm/glm.hpp \
   ../../shared/include/glm/detail/_fixes.hpp \
   ../../shared/include/glm/fwd.hpp \
   ../../shared/include/glm/detail/type_int.hpp \
@@ -88,11 +95,8 @@ Debug/A5.o: ../A5.cpp ../A5.hpp ../../shared/include/glm/glm.hpp \
   ../../shared/include/glm/vector_relational.hpp \
   ../../shared/include/glm/integer.hpp \
   ../../shared/include/glm/detail/func_integer.hpp \
-  ../../shared/include/glm/detail/func_integer.inl \
-  ../../shared/cs488-framework/CS488Window.hpp \
-  ../../shared/include/GLFW/glfw3.h \
-  ../../shared/cs488-framework/OpenGLImport.hpp \
-  ../../shared/cs488-framework/ShaderProgram.hpp ../maze.hpp \
+  ../../shared/include/glm/detail/func_integer.inl ../maze.hpp \
+  ../Animation.hpp ../SceneNode.hpp ../Material.hpp ../Player.hpp \
   ../../shared/cs488-framework/GlErrorCheck.hpp \
   ../../shared/imgui/imgui.h ../../shared/imgui/imconfig.h \
   ../../shared/include/glm/gtc/matrix_transform.hpp \
@@ -122,6 +126,18 @@ Debug/A5.o: ../A5.cpp ../A5.hpp ../../shared/include/glm/glm.hpp \
   ../../shared/include/glm/gtc/type_ptr.inl ../stb_image.h
 
 ../A5.hpp:
+
+../../shared/cs488-framework/CS488Window.hpp:
+
+../../shared/include/GLFW/glfw3.h:
+
+../../shared/cs488-framework/OpenGLImport.hpp:
+
+../../shared/cs488-framework/ShaderProgram.hpp:
+
+../../shared/cs488-framework/MeshConsolidator.hpp:
+
+../../shared/cs488-framework/BatchInfo.hpp:
 
 ../../shared/include/glm/glm.hpp:
 
@@ -305,15 +321,15 @@ Debug/A5.o: ../A5.cpp ../A5.hpp ../../shared/include/glm/glm.hpp \
 
 ../../shared/include/glm/detail/func_integer.inl:
 
-../../shared/cs488-framework/CS488Window.hpp:
-
-../../shared/include/GLFW/glfw3.h:
-
-../../shared/cs488-framework/OpenGLImport.hpp:
-
-../../shared/cs488-framework/ShaderProgram.hpp:
-
 ../maze.hpp:
+
+../Animation.hpp:
+
+../SceneNode.hpp:
+
+../Material.hpp:
+
+../Player.hpp:
 
 ../../shared/cs488-framework/GlErrorCheck.hpp:
 

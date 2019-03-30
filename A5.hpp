@@ -1,75 +1,131 @@
-// Winter 2019
+//
+// Created by Zhihan Wen on 2019-03-28.
+//
 
 #pragma once
-
-#include <glm/glm.hpp>
 
 #include "cs488-framework/CS488Window.hpp"
 #include "cs488-framework/OpenGLImport.hpp"
 #include "cs488-framework/ShaderProgram.hpp"
+#include "cs488-framework/MeshConsolidator.hpp"
 
+#include <glm/glm.hpp>
 #include "maze.hpp"
+#include "Animation.hpp"
+#include "SceneNode.hpp"
+#include "Player.hpp"
 
-class A1 : public CS488Window {
+struct LightSource {
+    glm::vec3 position;
+    glm::vec3 rgbIntensity;
+};
+
+
+class A5 : public CS488Window  {
 public:
-	A1();
-	virtual ~A1();
+    A5();
+    virtual ~A5();
 
 protected:
-	virtual void init() override;
-	virtual void appLogic() override;
-	virtual void guiLogic() override;
-	virtual void draw() override;
-	virtual void cleanup() override;
+    virtual void init();
+    virtual void appLogic();
+    virtual void guiLogic();
+    virtual void draw();
+    virtual void cleanup();
 
-	virtual bool cursorEnterWindowEvent(int entered) override;
-	virtual bool mouseMoveEvent(double xPos, double yPos) override;
-	virtual bool mouseButtonInputEvent(int button, int actions, int mods) override;
-	virtual bool mouseScrollEvent(double xOffSet, double yOffSet) override;
-	virtual bool windowResizeEvent(int width, int height) override;
-	virtual bool keyInputEvent(int key, int action, int mods) override;
+    //-- Virtual callback methods
+    virtual bool cursorEnterWindowEvent(int entered);
+    virtual bool mouseMoveEvent(double xPos, double yPos);
+    virtual bool mouseButtonInputEvent(int button, int actions, int mods);
+    virtual bool mouseScrollEvent(double xOffSet, double yOffSet);
+    virtual bool windowResizeEvent(int width, int height);
+    virtual bool keyInputEvent(int key, int action, int mods);
 
-	
+    //-- One time initialization methods:
+    //SceneNode *readLuaSceneFile(const std::string& filename);
+    void uploadVertexDataToVbos(const MeshConsolidator & meshConsolidator);
+    void initViewMatrix();
+    void initLightSources();
+    void initPerspectiveMatrix();
+    void initShaderProgram(ShaderProgram& program, const std::string& name);
+
+    glm::mat4 m_perpsective;
+    glm::mat4 m_view;
+
+    LightSource m_light;
+
+    //-- GL resources for mesh geometry data:
+    GLuint m_vao_meshData;
+    GLuint m_vbo_vertexPositions;
+    GLuint m_vbo_vertexNormals;
+    GLuint m_vbo_uvCoords;
+    ShaderProgram m_shader;
+
+    // BatchInfoMap is an associative container that maps a unique MeshId to a BatchInfo
+    // object. Each BatchInfo object contains an index offset and the number of indices
+    // required to render the mesh with identifier MeshId.
+    BatchInfoMap m_batchInfoMap;
+
+    std::string m_luaSceneFile;
+
+    SceneNode * blockSceneNode;
+    SceneNode * puppetSceneNode;
 
 private:
-	Maze *m;
-	void initGrid();
-	void DrawCube(glm::mat4 W);
-	void DrawAvatar(glm::mat4 W);
-	void DrawFloor();
-	void MoveUp();
-	void MoveDown();
-	void MoveLeft();
-	void MoveRight();
-	void Reset();
+    struct Mouse {
+        double x;
+        double y;
+        double prevX;
+        double prevY;
+        bool isControllingMinimap = false;
+        bool isRightButtonPressed = false;
+        bool isLeftButtonPressed = false;
+        bool isMiddleButtonPressed = false;
+    } mouse;
 
-	// Fields related to the shader and uniforms.
-	ShaderProgram m_shader;
-	GLint P_uni; // Uniform location for Projection matrix.
-	GLint V_uni; // Uniform location for View matrix.
-	GLint M_uni; // Uniform location for Model matrix.
-	GLint col_uni;   // Uniform location for cube colour.
+    /* Texture */
+    GLuint wallTexture;
+    GLuint floorTexture;
 
-	// Fields related to grid geometry.
-	GLuint m_grid_vao; // Vertex Array Object
-	GLuint m_grid_vbo; // Vertex Buffer Object
-	GLuint VAO;
-	GLuint VBO;
 
-	// Matrices controlling the camera and projection.
-	glm::mat4 proj;
-	glm::mat4 view;
+    /* Animation */
+    double animationStartTime;
+    Animation playerWalkingAnimation;
+    Animation playerStandingAnimation;
+    Animation playerPreparingToJumpAnimation;
+    Animation playerJumpingAnimation;
+    Animation* currentAnimation;
 
-	float colour[3];
-	glm::vec3 floor_color;
-	glm::vec3 maze_color;
-	glm::vec3 avatar_color;
-	int current_col;
-	float h;
-	int avatarX, avatarY;
-	float current_xPos;
-	float rotation;
-	float scale;
-	int persistence;
-	float movement;
+    // std::set<int> keysPressed;
+
+    Player player;
+
+    bool isKeyPressed(int key);
+
+    /* sky box */
+    static GLuint readTextureCubemap(std::string);
+    GLuint skyboxVAO;
+    GLuint skyboxVBO;
+    void renderSkybox(const glm::mat4& Projection, const glm::mat4& View);
+
+    /* Sound */
+
+    /* Collision */
+
+    /* Physics */
+
+    struct World {
+        glm::vec3 F_g; // Gravitational force
+        float ufs; // co-efficient of static friction
+        float ufk; // co-efficient of kinetic friction
+        World(glm::vec3, float, float);
+
+    } world;
+
+    /* Transparency */
+
+
+
 };
+
+
